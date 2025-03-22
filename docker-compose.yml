@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  web:
+    image: yourdockerhub/cd_docker_project:latest
+    ports:
+      - '80:5001'
+    restart: always
