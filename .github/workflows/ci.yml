@@ -1,0 +1,24 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9]  # 🔹 Мультиверсии Python
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          pip install flake8
+          pip install -r requirements.txt
+      - name: Run flake8  # 🔹 Линтер
+        run: flake8 .
+      - name: Run tests
+        run: python -m unittest discover
+
